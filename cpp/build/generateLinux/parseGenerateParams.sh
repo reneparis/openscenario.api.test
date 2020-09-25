@@ -5,6 +5,7 @@ PLATFORM_NAME="Linux"
 BUILD_TARGET="Release"
 # Static or shared lib
 BUILD_STATIC_LIBS="OFF"
+LIB_TYPE_STR="Shared"
 # Build / compile project directly after cmake.
 MAKE="no"
 
@@ -18,6 +19,7 @@ for i in $* ; do
             ;;
         "static")
             BUILD_STATIC_LIBS="ON"
+            LIB_TYPE_STR="Static"
             ;;	
         *)
             ;;

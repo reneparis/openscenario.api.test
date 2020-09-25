@@ -4,21 +4,18 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd ${SCRIPT_DIR}
 
+for i in Linux Win32 x64 ; do
+    for j in Shared Static ; do
+        for k in Release Debug ; do
+            echo "rm -rf ${SCRIPT_DIR}/../output/${i}${j}/${k}/examples"
+            rm -rf ${SCRIPT_DIR}/../output/${i}${j}/${k}/examples
+            echo "mkdir -p ${SCRIPT_DIR}/../output/${i}${j}/${k}/examples"
+            mkdir -p ${SCRIPT_DIR}/../output/${i}${j}/${k}/examples
+            echo "cp -r ${SCRIPT_DIR}/../../../doc/examples ${SCRIPT_DIR}/../output/${i}${j}/${k}"
+            cp -r ${SCRIPT_DIR}/../../../doc/examples ${SCRIPT_DIR}/../output/${i}${j}/${k}
+        done
+    done
+    echo
+done
 
-# copy examples for release
-echo "rm -rf ${SCRIPT_DIR}/../output/Linux/Release/examples"
-rm -rf ${SCRIPT_DIR}/../output/Linux/Release/res
-echo "mkdir -p ${SCRIPT_DIR}/../output/Linux/Release/examples"
-mkdir -p ${SCRIPT_DIR}/../output/Linux/Release/res
-echo "cp -r ${SCRIPT_DIR}/../../../doc/examples ${SCRIPT_DIR}/../output/Linux/Release"
-cp -r ${SCRIPT_DIR}/../../../doc/examples ${SCRIPT_DIR}/../output/Linux/Release
-
-
-# copy examples for debug
-echo "rm -rf ${SCRIPT_DIR}/../output/Linux/Debug/examples"
-rm -rf ${SCRIPT_DIR}/../output/Linux/Debug/res
-echo "mkdir -p ${SCRIPT_DIR}/../output/Linux/Debug/examples"
-mkdir -p ${SCRIPT_DIR}/../output/Linux/Debug/res
-echo "cp -r ${SCRIPT_DIR}/../../../doc/examples ${SCRIPT_DIR}/../output/Linux/Debug"
-cp -r ${SCRIPT_DIR}/../../../doc/examples ${SCRIPT_DIR}/../output/Linux/Debug
-
+for i in `find ${SCRIPT_DIR}/../output -name ".gitignore" -print` ; do rm -f $i; done

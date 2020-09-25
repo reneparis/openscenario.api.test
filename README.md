@@ -80,9 +80,22 @@ $ sudo apt install uuid-dev
 ```bash
 $ ./generateLinux.sh Release make
 ```
-* This creates all necessary makefiles for building the openSCENARIO library as shared library and starts the compilation process by executing `make -j8` starting 8 build threads. If you have 8 GB then change the make command to `make` only as described above in the paragraph **"System requirements"**.
-* The general call to the script above is `./generateLinux.sh [Release|Debug] [static] [make]`.
-* To create a package containing all necessary include files and binaries (libraries) execute the bash script below. A file named `openSCENARIO_<date>.tgz` will be created.
+* This creates all necessary makefiles for building the openSCENARIO library as shared library and starts the compilation process by executing `make -j8` starting 8 build threads. If you have 8 GB then change the make command to `make` only (without the `-j8` parameter) as described above in the paragraph **"System requirements"**.
+* The general call to the script above is `./generateLinux.sh [Release|Debug] [static|shared] [make]`. For example the command give above will build the OpenSCENARIO shared libraries with an example implementation in the following directory structure:
+```bash
+📦cpp
+ ┣ 📂build
+ ┃ ┣ 📂generateLinux
+ ┃ ┃ ┣ 📂gccLinuxSharedRelease
+ ┃ ┃ ┃   Here are the makefiles located to build the libraries and binaries.
+ ┃ ┗ 📂output
+ ┃ ┃ ┣ 📂LinuxShared
+ ┃ ┃ ┃ ┗ 📂Release
+ ┃ ┃ ┃ ┃   Here are the libraries and binaries.
+ ┃ ┃ ┃ ┃ ┣ 📂examples
+ ┃ ┃ ┃ ┃ ┃   This folder containing the example files.
+```
+ * To create a package containing all necessary include files and binaries (libraries) execute the bash script below. A file named `openSCENARIO_<date>.tgz` will be created.
 ```bash
 $ ./createLinuxBinPackage.sh
 ```

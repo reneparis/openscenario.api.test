@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Usage:
+# ./generateLinux.sh make Release static
+# -> generate the Release version with static libraries and immediately start compiling
+
 # Check if cmake is installed
 command -v cmake >/dev/null 2>&1 || { echo >&2 "cmake is required to build the software. Please install it. Aborting."; exit 1; }
 
@@ -18,10 +22,10 @@ done
 echo $ROOT_DIR
 
 # Parse parameters
-. ${SCRIPT_DIR}/parse_generate_params.sh $1 $2 $3
+. ${SCRIPT_DIR}/parseGenerateParams.sh $1 $2 $3
 
 # Create build folder
-BUILDFOLDER="gcc${PLATFORM_NAME}${BUILD_TARGET}"
+BUILDFOLDER="gcc${PLATFORM_NAME}${LIB_TYPE_STR}${BUILD_TARGET}"
 mkdir -p "${BUILDFOLDER}"
 cd "${BUILDFOLDER}"
 
