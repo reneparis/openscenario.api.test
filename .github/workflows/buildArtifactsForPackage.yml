@@ -25,9 +25,10 @@ jobs:
     - name: cmake generate solution Debug
       run: cmake -DCMAKE_BUILD_TYPE="Debug" -DBUILD_STATIC_LIBS="OFF" -DPLATFORM_PARAM="Linux" ./cpp
       
-    - name: build solution Debug
-      run: make
-
+#    - name: build solution Debug
+#      run: make
+    - name: get working directora
+      run: echo {{github.workspace}}
 
   CreatePackage:
     runs-on: ubuntu-latest
