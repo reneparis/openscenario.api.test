@@ -25,33 +25,56 @@ jobs:
     - name: cmake generate solution Debug
       run: cmake -DCMAKE_BUILD_TYPE="Debug" -DBUILD_STATIC_LIBS="OFF" -DPLATFORM_PARAM="Linux" ./cpp
       
-    - name: build solution Debug
-      run: make
-    
+#    - name: build solution Debug
+#      run: make
+
+    # fake build
+    - name: fake build solution Debug
+      run: mkdir -p ./cpp/build/output/LinuxShared/Debug
+    - name: fake build binaries
+      run: cd ./cpp/build/output/LinuxShared/Debug ; touch IndexerTester ; touch libantlr4-runtime.a ; touch libantlr4-runtime.so ; touch libantlr4-runtime.so.4.8 ; touch libOpenScenarioLib.v1_0.so ; touch libOpenScenarioLib.v1_0.so.0 ; touch libOpenScenarioLib.v1_0.so.0.9.0
+
     - name: publish artifacts
       uses: actions/upload-artifact@v2
       with:
         name: LinuxSharedDebug
-        path: ./cpp/build/output/LinuxShared/Debug/*
+        path: ./cpp/build/output/*
 
-on:
-  check_run:
-    types: [completed]
 
-jobs:
   CreatePackage:
     runs-on: ubuntu-latest
+    needs: [LinuxSharedDebugBuild]
 
     steps:
+    - uses: actions/checkout@v2
+
+    - name: update system
+      run:  sudo apt-get update
+
+#    - name: get working directory
+#      run: pwd ; ls -l ; ls -la ./cpp/build/generateLinux
+#
+#    - name: make script executable
+#      run: chmod a+x ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
+
+    - name: get artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: LinuxSharedDebug
+        path: ./cpp/build/output
+
     - name: create package
       run: ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
-      run: ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
+
+    - name: check package
+      run: ls ./cpp/build/generateLinux/openScenario*
 
     - name: publish artifacts
       uses: actions/upload-artifact@v2
       with:
         name: OpenScenarioWindowsLinuxDevPackage
-        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API
+        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API/
+
 
 #  LinuxSharedReleaseBuild:
 #    runs-on: ubuntu-latest
