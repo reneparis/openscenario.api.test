@@ -27,8 +27,8 @@ jobs:
       
 #    - name: build solution Debug
 #      run: make
-    - name: get working directora
-      run: echo {{github.workspace}}
+    - name: get working directory
+      run: pwd
 
   CreatePackage:
     runs-on: ubuntu-latest
