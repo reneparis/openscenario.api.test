@@ -21,11 +21,11 @@ jobs:
     - name: build solution Debug
       run: make
     
-     - name: publish artifacts
-       uses: actions/upload-artifact@v2
-       with:
-         name: LinuxSharedDebug
-         path: ./cpp/build/output/LinuxShared/Debug/*
+    - name: publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: LinuxSharedDebug
+        path: ./cpp/build/output/LinuxShared/Debug/*
 
 
   LinuxSharedReleaseBuild:
@@ -46,11 +46,11 @@ jobs:
     - name: build solution Release
       run: make
     
-     - name: publish artifacts
-       uses: actions/upload-artifact@v2
-       with:
-         name: LinuxSharedRelease
-         path: ./cpp/build/output/LinuxShared/Release/*
+    - name: publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: LinuxSharedRelease
+        path: ./cpp/build/output/LinuxShared/Release/*
 
 
   # Linux static
@@ -72,11 +72,11 @@ jobs:
     - name: build solution Debug
       run: make
     
-     - name: publish artifacts
-       uses: actions/upload-artifact@v2
-       with:
-         name: LinuxStaticDebug
-         path: ./cpp/build/output/LinuxStatic/Debug/*
+    - name: publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: LinuxStaticDebug
+        path: ./cpp/build/output/LinuxStatic/Debug/*
 
 
   LinuxStaticReleaseBuild:
