@@ -27,8 +27,6 @@ jobs:
       
 #    - name: build solution Debug
 #      run: make
-    - name: get working directory
-      run: pwd ; ls -l ; ls -la ./cpp/build/generateLinux
       
 
   CreatePackage:
@@ -36,6 +34,9 @@ jobs:
     needs: [LinuxSharedDebugBuild]
 
     steps:
+    - name: get working directory
+      run: pwd ; ls -l ; ls -la ./cpp/build/generateLinux
+
     - name: make script executable
       run: chmod a+x ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
 
