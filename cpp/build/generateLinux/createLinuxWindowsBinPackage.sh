@@ -107,12 +107,12 @@ cp -r "${SCRIPT_DIR}/../../../doc/examples" "${SCRIPT_DIR}/${OPEN_SCEANARIO_API}
 ################################################################
 # create package
 ################################################################
-CUR_DATE=`date '+%Y.%m.%d'`
-echo
-STEP=`expr ${STEP} + 1`
-echo -e "${GREEN}Step ${STEP}: Creating package <${OPEN_SCEANARIO_API}_${CUR_DATE}.tgz>${WHITE}"
-# tar and gzip
-tar -zcf "${OPEN_SCEANARIO_API}_${CUR_DATE}.tgz" "${OPEN_SCEANARIO_API}"
+#CUR_DATE=`date '+%Y.%m.%d'`
+#echo
+#STEP=`expr ${STEP} + 1`
+#echo -e "${GREEN}Step ${STEP}: Creating package <${OPEN_SCEANARIO_API}_${CUR_DATE}.tgz>${WHITE}"
+## tar and gzip
+#tar -zcf "${OPEN_SCEANARIO_API}_${CUR_DATE}.tgz" "${OPEN_SCEANARIO_API}"
 
 echo
 echo -e "${GREEN}Finished creating package!${WHITE}"

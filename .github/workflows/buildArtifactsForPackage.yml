@@ -4,8 +4,8 @@ on:
     # Inputs the workflow accepts.
     inputs:
       name:
-        description: 'Artifacts name'
-        default: 'OpenScenarioCppArtifacts'
+        description: 'Artifact name'
+        default: 'OpenScenarioWindowsLinuxDevPackage'
 
 
 jobs:
@@ -51,12 +51,6 @@ jobs:
     - name: update system
       run:  sudo apt-get update
 
-#    - name: get working directory
-#      run: pwd ; ls -l ; ls -la ./cpp/build/generateLinux
-#
-#    - name: make script executable
-#      run: chmod a+x ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
-
     - name: get artifacts
       uses: actions/download-artifact@v2
       with:
@@ -72,8 +66,8 @@ jobs:
     - name: publish artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: OpenScenarioWindowsLinuxDevPackage
-        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API/
+        name: ${{ github.event.inputs.name }}
+        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API
 
 
 #  LinuxSharedReleaseBuild:
