@@ -73,7 +73,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: OpenScenarioWindowsLinuxDevPackage
-        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API.*.tgz
+        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API/
 
 
 #  LinuxSharedReleaseBuild:
