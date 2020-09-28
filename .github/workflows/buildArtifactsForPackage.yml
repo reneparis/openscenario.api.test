@@ -77,10 +77,16 @@ jobs:
     - name: update system
       run:  sudo apt-get update
 
-    - name: get artifacts
+    - name: get artifacts LinuxSharedDebug
       uses: actions/download-artifact@v2
       with:
         name: LinuxSharedDebug
+        path: ./cpp/build/output
+
+    - name: get artifacts Win32SharedDebug
+      uses: actions/download-artifact@v2
+      with:
+        name: Win32SharedDebug
         path: ./cpp/build/output
 
     - name: create package
