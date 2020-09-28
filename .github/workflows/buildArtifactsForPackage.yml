@@ -27,14 +27,23 @@ jobs:
       
     - name: build solution Debug
       run: make
-    
+
+
+  CreatePackage:
+    runs-on: ubuntu-latest
+    needs: [LinuxSharedDebugBuild]
+
+    steps:
+    - name: create package
+      run: ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
+
     - name: publish artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: LinuxSharedDebug
-        path: ./cpp/build/output/LinuxShared/Debug/*
+        name: OpenScenarioWindowsLinuxDevPackage
+        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API
 
-#
+
 #  LinuxSharedReleaseBuild:
 #    runs-on: ubuntu-latest
 #    
