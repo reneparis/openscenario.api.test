@@ -28,13 +28,17 @@ jobs:
 #    - name: build solution Debug
 #      run: make
     - name: get working directory
-      run: pwd
+      run: pwd ; ls -l ; ls -la ./cpp/build/generateLinux
+      
 
   CreatePackage:
     runs-on: ubuntu-latest
     needs: [LinuxSharedDebugBuild]
 
     steps:
+    - name: make script executable
+      run: chmod a+x ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
+
     - name: create package
       run: ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
 
