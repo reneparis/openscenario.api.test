@@ -1,3 +1,5 @@
+# .github/workflows/buildArtifactsForPackage.yml
+
 name: OpenScenarioCppArtifacts
 on: [workflow_dispatch]
 
