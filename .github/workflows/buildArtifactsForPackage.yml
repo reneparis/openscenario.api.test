@@ -3,6 +3,11 @@
 name: OpenScenarioCppArtifacts
 on:
   workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        description: 'Artifacts name'
+        default: 'OpenScenarioCppArtifacts'
 
 # This is a basic workflow that is manually triggered
 
