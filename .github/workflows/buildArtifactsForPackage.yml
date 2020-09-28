@@ -25,13 +25,19 @@ jobs:
     - name: cmake generate solution Debug
       run: cmake -DCMAKE_BUILD_TYPE="Debug" -DBUILD_STATIC_LIBS="OFF" -DPLATFORM_PARAM="Linux" ./cpp
       
-    - name: build solution Debug
-      run: make
+#    - name: build solution Debug
+#      run: make
+
+    # fake build
+    - name: fake build solution Debug
+      run: mkdir -p ./cpp/build/output/LinuxShared/Debug
+    - name: fake build binaries
+      run: cd ./cpp/build/output/LinuxShared/Debug ; touch IndexerTester ; touch libantlr4-runtime.a ; touch libantlr4-runtime.so ; touch libantlr4-runtime.so.4.8 ; touch libOpenScenarioLib.v1_0.so ; touch libOpenScenarioLib.v1_0.so.0 ; touch libOpenScenarioLib.v1_0.so.0.9.0
 
     - name: publish artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: LinuxSharedRelease
+        name: LinuxSharedDebug
         path: ./cpp/build/output/*
 
 
@@ -54,17 +60,20 @@ jobs:
     - name: get artifacts
       uses: actions/download-artifact@v2
       with:
-        name: LinuxSharedRelease
+        name: LinuxSharedDebug
         path: ./cpp/build/output
 
     - name: create package
       run: ./cpp/build/generateLinux/createLinuxWindowsBinPackage.sh
 
+    - name: check package
+      run: ls ./cpp/build/generateLinux/openScenario*
+
     - name: publish artifacts
       uses: actions/upload-artifact@v2
       with:
         name: OpenScenarioWindowsLinuxDevPackage
-        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API
+        path: ./cpp/build/output/generateLinux/openScenario.v1_0.API.*.tgz
 
 
 #  LinuxSharedReleaseBuild:
