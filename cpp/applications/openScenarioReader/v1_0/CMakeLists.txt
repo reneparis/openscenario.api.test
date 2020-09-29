@@ -11,6 +11,12 @@ else( WIN32 )
   add_definitions( -Wall -fPIC -Wno-unused-variable )
 endif( WIN32 )
 
+if( ${BUILD_STATIC_LIBS} STREQUAL ON )
+  set( BUILD_SHARED_LIBS FALSE )
+else()
+  set( BUILD_SHARED_LIBS TRUE )
+endif()
+
 
 ################################################################
 # This is needed because of the way the cmakefiles for ANTLR4-Cpp-src are written

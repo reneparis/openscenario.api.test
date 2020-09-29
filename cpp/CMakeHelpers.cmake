@@ -66,11 +66,15 @@ endmacro (RAC_SET_BUILD_PARAM)
 ################################################################
 # Set folders
 macro (RAC_SET_FOLDERS)
-    # Reflect static / shared build in ouput folder
+    message("lib binding type 6: ${BUILD_STATIC_LIBS}")
+
+    # Reflect static / shared build in output folder
     set( LIB_BINDING_TYPE "Shared"  )
-    if( ${BUILD_STATIC_LIBS} STREQUAL "ON" )
+    if( ${BUILD_STATIC_LIBS} STREQUAL ON )
         set( LIB_BINDING_TYPE "Static" )
+	    message("lib binding type *: ${LIB_BINDING_TYPE}")
     endif()
+    message("lib binding type 7: ${BUILD_STATIC_LIBS}")
     # On Windows CMAKE_BUILD_TYPE is empty, but the build type is added automatically as defined in the MSBuild-call (Release/Debug)
     set( CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build/output/${PLATFORM_PARAM}${LIB_BINDING_TYPE}/${CMAKE_BUILD_TYPE} )
     set( EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR} )

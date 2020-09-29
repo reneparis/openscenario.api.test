@@ -27,3 +27,5 @@
 build/*
 RabbitVCSwithGitHub/*
 openscenario.api.test.code-workspace
+/.vs
+/cpp/build/generateWindows/VS2017_static

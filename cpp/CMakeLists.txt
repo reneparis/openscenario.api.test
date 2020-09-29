@@ -13,7 +13,9 @@ include( CMakeHelpers )
 
 ################################################################
 # Build as static or shared lib, Debug or Release, for Linux or Windows
-option( BUILD_STATIC_LIBS "Build the library as STATIC" OFF )
+message("lib binding type 1: ${BUILD_STATIC_LIBS}")
+option( ${BUILD_STATIC_LIBS} "Build the library as STATIC" OFF )
+message("lib binding type 2: ${BUILD_STATIC_LIBS}")
 if( UNIX )
     if(NOT CMAKE_BUILD_TYPE)
         set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Debug, Release" FORCE)
@@ -23,6 +25,7 @@ endif( UNIX )
 if(NOT PLATFORM_PARAM)
     set(PLATFORM_PARAM "${CMAKE_SYSTEM_NAME}" CACHE STRING "Linux, Windows, etc" FORCE)
 endif(NOT PLATFORM_PARAM)
+message("lib binding type 3: ${BUILD_STATIC_LIBS}")
 
 set(ENV{CMAKE_BUILD_PARALLEL_LEVEL} 4)
 
@@ -52,9 +55,11 @@ message("Subprojects:")
 
 # Set compile output folder for OpenSCENARIO core libs
 # This is needed because of the way the makefiles for ANTLR4-Cpp-src are written
+message("lib binding type 4: ${BUILD_STATIC_LIBS}")
 unset(CMAKE_BUILD_TYPE CACHE)
 RAC_SET_FOLDERS()
 message ("Building all into: ${CMAKE_BINARY_DIR}")
+message("lib binding type 5: ${BUILD_STATIC_LIBS}")
 
 # Dependencies
 add_subdirectory( externalLibs/ANTLR4-Cpp-src ${PROJECT_BINARY_DIR}/externalLibs/ANTLR4-Cpp-src)

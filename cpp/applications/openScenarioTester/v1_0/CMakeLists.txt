@@ -12,11 +12,17 @@ else( WIN32 )
   add_definitions( -Wall -fPIC -Wno-unused-variable )
 endif( WIN32 )
 
+if( ${BUILD_STATIC_LIBS} STREQUAL ON )
+  set( BUILD_SHARED_LIBS FALSE )
+else()
+  set( BUILD_SHARED_LIBS TRUE )
+endif()
+
 
 ################################################################
 # Preprocessor settings
 # Shared or static lib?
-if( BUILD_STATIC_LIBS )
+if( ${BUILD_STATIC_LIBS} STREQUAL ON )
   set( LIB_TYPE "STATIC" )
 else()
   add_definitions( -DEXPORT_OPENSCENARIOLIB )

@@ -11,10 +11,17 @@ else( WIN32 )
   add_definitions( -Wall -fPIC -Wno-unused-variable )
 endif( WIN32 )
 
+if( ${BUILD_STATIC_LIBS} STREQUAL ON )
+  set( BUILD_SHARED_LIBS FALSE )
+else()
+  set( BUILD_SHARED_LIBS TRUE )
+endif()
+
+
 ################################################################
 # Preprocessor settings
 # Shared or static lib?
-if( ${BUILD_STATIC_LIBS} STREQUAL "ON" )
+if( ${BUILD_STATIC_LIBS} STREQUAL ON )
   set( LIB_TYPE "STATIC" )
 #  if( LINUX )
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=default -fno-visibility-inlines-hidden")
@@ -347,7 +354,7 @@ add_library ( ${PROJECT_NAME} ${LIB_TYPE} ${SOURCES} ${SOURCES_GENERATED_API} ${
               ${HEADERS_GENERATED_CHECKER_RANGE} ${HEADERS_GENERATED_CATALOG} ${HEADERS_GENERATED_IMPL} ${HEADERS_GENERATED_XMLPARSER} 
               ${RESOURCE_FILES} )
 
-if( BUILD_STATIC_LIBS STREQUAL "ON" )
+if( ${BUILD_STATIC_LIBS} STREQUAL ON )
   target_link_libraries( ${PROJECT_NAME} antlr4_static )
 else()
   target_link_libraries( ${PROJECT_NAME} antlr4_shared )
