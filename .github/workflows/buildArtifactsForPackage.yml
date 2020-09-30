@@ -24,75 +24,75 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: LinuxSharedDebug
-        path: ./cpp/build/output/LinuxSharedDebug
+        path: ./cpp/build/output/LinuxShared/Debug
 
     - name: get artifacts LinuxSharedRelease
       uses: actions/download-artifact@v2
       with:
         name: LinuxSharedRelease
-        path: ./cpp/build/output/LinuxSharedRelease
+        path: ./cpp/build/output/LinuxShared/Release
 
     - name: get artifacts LinuxStaticDebug
       uses: actions/download-artifact@v2
       with:
         name: LinuxStaticDebug
-        path: ./cpp/build/output/LinuxStaticDebug
+        path: ./cpp/build/output/LinuxStatic/Debug
 
     - name: get artifacts LinuxStaticRelease
       uses: actions/download-artifact@v2
       with:
         name: LinuxStaticRelease
-        path: ./cpp/build/output/LinuxStaticRelease
+        path: ./cpp/build/output/LinuxStatic/Release
 
     # Windows builds
     - name: get artifacts Win32SharedDebug
       uses: actions/download-artifact@v2
       with:
         name: Win32SharedDebug
-        path: ./cpp/build/output/Win32SharedDebug
+        path: ./cpp/build/output/Win32Shared/Debug
 
     - name: get artifacts Win32SharedRelease
       uses: actions/download-artifact@v2
       with:
         name: Win32SharedRelease
-        path: ./cpp/build/output/Win32SharedRelease
+        path: ./cpp/build/output/Win32Shared/Release
 
     - name: get artifacts x64SharedDebug
       uses: actions/download-artifact@v2
       with:
         name: x64SharedDebug
-        path: ./cpp/build/output/x64SharedDebug
+        path: ./cpp/build/output/x64Shared/Debug
 
     - name: get artifacts x64SharedRelease
       uses: actions/download-artifact@v2
       with:
         name: x64SharedRelease
-        path: ./cpp/build/output/x64SharedRelease
+        path: ./cpp/build/output/x64Shared/Release
 
 
     - name: get artifacts Win32StaticDebug
       uses: actions/download-artifact@v2
       with:
         name: Win32StaticDebug
-        path: ./cpp/build/output/Win32StaticDebug
+        path: ./cpp/build/output/Win32Static/Debug
 
     - name: get artifacts Win32StaticRelease
       uses: actions/download-artifact@v2
       with:
         name: Win32StaticRelease
-        path: ./cpp/build/output/Win32StaticRelease
+        path: ./cpp/build/output/Win32Static/Release
 
     - name: get artifacts x64StaticDebug
       uses: actions/download-artifact@v2
       with:
         name: x64StaticDebug
-        path: ./cpp/build/output/x64StaticDebug
+        path: ./cpp/build/output/x64Static/Debug
 
     - name: get artifacts x64StaticRelease
       uses: actions/download-artifact@v2
       with:
         name: x64StaticRelease
-        path: ./cpp/build/output/x64StaticRelease
+        path: ./cpp/build/output/x64Static/Release
 
 
     - name: create package
@@ -137,7 +137,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: LinuxSharedDebug
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/LinuxShared/Debug/*
 
 
   LinuxSharedReleaseBuild:
@@ -162,7 +162,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: LinuxSharedRelease
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/LinuxShared/Release/*
 
 
   # Linux static
@@ -188,7 +188,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: LinuxStaticDebug
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/LinuxStatic/Debug/*
 
 
   LinuxStaticReleaseBuild:
@@ -213,7 +213,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: LinuxStaticRelease
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/LinuxStatic/Release/*
 
 
   # Win32 shared
@@ -239,7 +239,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Win32SharedDebug
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/Win32Shared/Debug/*
 
 
   Win32SharedReleaseBuild:
@@ -258,7 +258,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Win32SharedRelease
-        path: ./cpp/build/output/
+        path: ./cpp/build/output/Win32Shared/Release/*
 
 
   # x64 shared
@@ -278,7 +278,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: x64SharedDebug
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/x64Shared/Debug/*
 
 
   x64SharedReleaseBuild:
@@ -297,7 +297,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: x64SharedRelease
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/x64Shared/Release/*
 
 
   # Win32 static
@@ -317,7 +317,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Win32StaticDebug
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/Win32Static/Debug/*
 
 
   Win32StaticReleaseBuild:
@@ -336,7 +336,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Win32StaticRelease
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/Win32Static/Release/*
 
 
   # x64 static
@@ -356,7 +356,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: x64StaticDebug
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/x64Static/Debug/*
 
 
   x64StaticReleaseBuild:
@@ -375,5 +375,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: x64StaticRelease
-        path: ./cpp/build/output/*
+        path: ./cpp/build/output/x64Static/Release/*
 
