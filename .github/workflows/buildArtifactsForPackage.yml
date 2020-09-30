@@ -24,75 +24,75 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: LinuxSharedDebug
-        path: ./cpp/build/output
+        path: ./cpp/build/output/LinuxSharedDebug
 
     - name: get artifacts LinuxSharedRelease
       uses: actions/download-artifact@v2
       with:
         name: LinuxSharedRelease
-        path: ./cpp/build/output
+        path: ./cpp/build/output/LinuxSharedRelease
 
     - name: get artifacts LinuxStaticDebug
       uses: actions/download-artifact@v2
       with:
         name: LinuxStaticDebug
-        path: ./cpp/build/output
+        path: ./cpp/build/output/LinuxStaticDebug
 
     - name: get artifacts LinuxStaticRelease
       uses: actions/download-artifact@v2
       with:
         name: LinuxStaticRelease
-        path: ./cpp/build/output
+        path: ./cpp/build/output/LinuxStaticRelease
 
     # Windows builds
     - name: get artifacts Win32SharedDebug
       uses: actions/download-artifact@v2
       with:
         name: Win32SharedDebug
-        path: ./cpp/build/output
+        path: ./cpp/build/output/Win32SharedDebug
 
     - name: get artifacts Win32SharedRelease
       uses: actions/download-artifact@v2
       with:
         name: Win32SharedRelease
-        path: ./cpp/build/output
+        path: ./cpp/build/output/Win32SharedRelease
 
     - name: get artifacts x64SharedDebug
       uses: actions/download-artifact@v2
       with:
         name: x64SharedDebug
-        path: ./cpp/build/output
+        path: ./cpp/build/output/x64SharedDebug
 
     - name: get artifacts x64SharedRelease
       uses: actions/download-artifact@v2
       with:
         name: x64SharedRelease
-        path: ./cpp/build/output
+        path: ./cpp/build/output/x64SharedRelease
 
 
     - name: get artifacts Win32StaticDebug
       uses: actions/download-artifact@v2
       with:
         name: Win32StaticDebug
-        path: ./cpp/build/output
+        path: ./cpp/build/output/Win32StaticDebug
 
     - name: get artifacts Win32StaticRelease
       uses: actions/download-artifact@v2
       with:
         name: Win32StaticRelease
-        path: ./cpp/build/output
+        path: ./cpp/build/output/Win32StaticRelease
 
     - name: get artifacts x64StaticDebug
       uses: actions/download-artifact@v2
       with:
         name: x64StaticDebug
-        path: ./cpp/build/output
+        path: ./cpp/build/output/x64StaticDebug
 
     - name: get artifacts x64StaticRelease
       uses: actions/download-artifact@v2
       with:
         name: x64StaticRelease
-        path: ./cpp/build/output
+        path: ./cpp/build/output/x64StaticRelease
 
 
     - name: create package
