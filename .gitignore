@@ -1,5 +1,7 @@
 /cpp/build/generateWindows/VS2017/*
 /cpp/build/generateWindows/VS2017_x64/*
+/cpp/build/generateWindows/VS2017_static
+/cpp/build/generateWindows/VS2017_shared
 /cpp/build/output/*
 /cpp/build/generateLinux/gccLinuxRelease/*
 /cpp/build/generateLinux/gccLinuxDebug/*
@@ -28,4 +30,3 @@ build/*
 RabbitVCSwithGitHub/*
 openscenario.api.test.code-workspace
 /.vs
-/cpp/build/generateWindows/VS2017_static

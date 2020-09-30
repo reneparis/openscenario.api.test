@@ -1,7 +1,7 @@
 ################################################################
 cmake_minimum_required( VERSION 3.8.2 )
 project( OpenScenarioReader.v1_0 )
-message("${PROJECT_NAME}")
+message( "${PROJECT_NAME}" )
 
 ################################################################
 # Preprocessor settings
@@ -11,28 +11,28 @@ else( WIN32 )
   add_definitions( -Wall -fPIC -Wno-unused-variable )
 endif( WIN32 )
 
-if( ${BUILD_STATIC_LIBS} STREQUAL ON )
-  set( BUILD_SHARED_LIBS FALSE )
-else()
-  set( BUILD_SHARED_LIBS TRUE )
-endif()
+#if( ${BUILD_STATIC_LIBS} STREQUAL ON )
+#  set( BUILD_SHARED_LIBS FALSE )
+#else()
+#  set( BUILD_SHARED_LIBS TRUE )
+#endif()
 
 
 ################################################################
 # This is needed because of the way the cmakefiles for ANTLR4-Cpp-src are written
-unset(CMAKE_BUILD_TYPE CACHE)
+unset( CMAKE_BUILD_TYPE CACHE )
 ################################################################
 # Set compile output folder
 RAC_SET_FOLDERS()
-message ("Building all into: ${CMAKE_BINARY_DIR}")
+message ( "Building all into: ${CMAKE_BINARY_DIR}" )
 
 
 ################################################################
 # Include folders
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/src )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../common)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../common )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../externalLibs/TinyXML2 )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../externalLibs/Filesystem)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../externalLibs/Filesystem )
 
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/src/catalog )
@@ -57,7 +57,7 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/g
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/checker )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/checker/impl )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/checker/range )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/catalog)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/catalog )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/impl )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/xmlParser )
 
@@ -68,13 +68,13 @@ set( SOURCES
   ${SOURCES}
   "src/OpenScenarioReader.cpp"
   "../../../externalLibs/TinyXML2/tinyxml2.cpp"
-)
+ )
 
 ################################################################
 # Header files
 set( HEADERS
   ${HEADERS}
-)
+ )
 
 ################################################################
 # Create groups for VS
@@ -94,24 +94,24 @@ if( MSVC )
 FILE( WRITE "${CMAKE_CURRENT_BINARY_DIR}/OpenScenarioReaderv1_0.vcxproj.user"
   "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
   "<Project ToolsVersion=\"15.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\n"
-  "  <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Debug|${PLATFORM_PARAM}'\">\n"
+  "  <PropertyGroup Condition=\"'$( Configuration )|$( Platform )'=='Debug|${PLATFORM_PARAM}'\">\n"
   "    <LocalDebuggerCommandArguments>-i ../../../../../../applications/openScenarioReader/res/simpleImport/simpleImport.xosc</LocalDebuggerCommandArguments>\n"
   "    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n"
   "  </PropertyGroup>\n"
-  "  <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='MinSizeRel|${PLATFORM_PARAM}'\">\n"
+  "  <PropertyGroup Condition=\"'$( Configuration )|$( Platform )'=='MinSizeRel|${PLATFORM_PARAM}'\">\n"
   "    <LocalDebuggerCommandArguments>-i ../../../../../../applications/openScenarioReader/res/simpleImport/simpleImport.xosc</LocalDebuggerCommandArguments>\n"
   "    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n"
   "  </PropertyGroup>\n"
-  "  <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|${PLATFORM_PARAM}'\">\n"
+  "  <PropertyGroup Condition=\"'$( Configuration )|$( Platform )'=='Release|${PLATFORM_PARAM}'\">\n"
   "    <LocalDebuggerCommandArguments>-i ../../../../../../applications/openScenarioReader/res/simpleImport/simpleImport.xosc</LocalDebuggerCommandArguments>\n"
   "    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n"
   "  </PropertyGroup>\n"
-  "  <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='RelWithDebInfo|${PLATFORM_PARAM}'\">\n"
+  "  <PropertyGroup Condition=\"'$( Configuration )|$( Platform )'=='RelWithDebInfo|${PLATFORM_PARAM}'\">\n"
   "    <LocalDebuggerCommandArguments>-i ../../../../../../applications/openScenarioReader/res/simpleImport/simpleImport.xosc</LocalDebuggerCommandArguments>\n"
   "    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n"
   "  </PropertyGroup>\n"
   "</Project>\n"
-)
+ )
 endif()
 
 
@@ -126,4 +126,7 @@ target_link_libraries( ${PROJECT_NAME} OpenScenarioLib.v1_0 )
 # Visual Studio solution settings
 if( MSVC )
   set_target_properties( ${PROJECT_NAME} PROPERTIES FOLDER Apps )
+  if( ${BUILD_STATIC_LIBS} STREQUAL ON )
+    target_compile_options( ${PROJECT_NAME} PRIVATE "/MT$<$<CONFIG:Debug>:d>" )
+  endif()
 endif()

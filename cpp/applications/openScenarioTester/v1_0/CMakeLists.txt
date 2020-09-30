@@ -1,7 +1,7 @@
 ################################################################
 cmake_minimum_required( VERSION 3.8.2 )
 project( OpenScenarioTester.v1_0 )
-message("${PROJECT_NAME}")
+message( "${PROJECT_NAME}" )
 
 
 ################################################################
@@ -12,11 +12,11 @@ else( WIN32 )
   add_definitions( -Wall -fPIC -Wno-unused-variable )
 endif( WIN32 )
 
-if( ${BUILD_STATIC_LIBS} STREQUAL ON )
-  set( BUILD_SHARED_LIBS FALSE )
-else()
-  set( BUILD_SHARED_LIBS TRUE )
-endif()
+#if( ${BUILD_STATIC_LIBS} STREQUAL ON )
+#  set( BUILD_SHARED_LIBS FALSE )
+#else()
+#  set( BUILD_SHARED_LIBS TRUE )
+#endif()
 
 
 ################################################################
@@ -32,16 +32,16 @@ endif()
 ################################################################
 # Set compile output folder
 RAC_SET_FOLDERS()
-message ("Building all into: ${CMAKE_BINARY_DIR}")
+message ( "Building all into: ${CMAKE_BINARY_DIR}" )
 
 
 ################################################################
 # Include folders
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/src )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/src/helper )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../common)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../common )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../externalLibs/TinyXML2 )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../externalLibs/Filesystem)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../externalLibs/Filesystem )
 
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/src/catalog )
@@ -64,7 +64,7 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/g
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/checker )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/checker/impl )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/checker/range )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/catalog)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/catalog )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../../../openScenarioLib/v1_0/generated/impl )
 
 
@@ -74,7 +74,7 @@ set( SOURCES
   ${SOURCES}
   "src/OpenScenarioTester.cpp"
   "../../../externalLibs/TinyXML2/tinyxml2.cpp"
-)
+ )
 
 ################################################################
 # Header files
@@ -90,12 +90,12 @@ set( HEADERS
   "src/TestFlexInterface.h"
   "src/TestVersionChecker.h"
   "src/TestInjectedParameters.h"
-)
+ )
 
 set( HEADERS_HELPER
   ${HEADERS_HELPER}
   "src/helper/EgoCheckerRule.h"
-)
+ )
 
 ################################################################
 # Create groups for VS
@@ -111,7 +111,7 @@ endif()
 
 ################################################################
 # Generate executable
-add_executable( ${PROJECT_NAME} ${SOURCES} ${HEADERS} ${HEADERS_HELPER})
+add_executable( ${PROJECT_NAME} ${SOURCES} ${HEADERS} ${HEADERS_HELPER} )
 
 target_link_libraries( ${PROJECT_NAME} OpenScenarioLib.v1_0 )
 
@@ -120,4 +120,7 @@ target_link_libraries( ${PROJECT_NAME} OpenScenarioLib.v1_0 )
 # Visual Studio solution settings
 if( MSVC )
   set_target_properties( ${PROJECT_NAME} PROPERTIES FOLDER Apps )
+  if( ${BUILD_STATIC_LIBS} STREQUAL ON )
+    target_compile_options( ${PROJECT_NAME} PRIVATE "/MT$<$<CONFIG:Debug>:d>" )
+  endif()
 endif()
