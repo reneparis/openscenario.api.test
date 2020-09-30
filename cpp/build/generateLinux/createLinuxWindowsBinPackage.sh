@@ -44,12 +44,12 @@ echo
 STEP=`expr ${STEP} + 1`
 echo -e "${GREEN}Step ${STEP}: Checking for compiled libraries${WHITE}"
 FOLDERS_TO_COPY=
-for i in Linux Win32 x64 ; do
-    for j in Shared Static ; do
+for j in Shared Static ; do
+	for i in Linux Win32 x64 ; do
         for k in Release Debug ; do
             if [ -d "${SCRIPT_DIR}/../output/${i}${j}/${k}" ] ; then
-                if [ -f "${SCRIPT_DIR}/../output/${i}${j}/${k}/libantlr4-runtime.a" ] || [ -f "${SCRIPT_DIR}/../output/${i}${j}/${k}/libantlr4-runtime.lib" ] ; then
-                    FOLDERS_TO_COPY="${FOLDERS_TO_COPY}${i}${j}/${k}:${i}/${k} "
+                if [ -f "${SCRIPT_DIR}/../output/${i}${j}/${k}/libantlr4-runtime.a" ] || [ -f "${SCRIPT_DIR}/../output/${i}${j}/${k}/antlr4-runtime.lib" ] ; then
+                    FOLDERS_TO_COPY="${FOLDERS_TO_COPY}${i}${j}/${k}:${j}/${i}/${k} "
                     echo "Libraries available as ${k} for ${i}${j}"
                 fi
             fi
