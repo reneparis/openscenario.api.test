@@ -30,3 +30,4 @@ build/*
 RabbitVCSwithGitHub/*
 openscenario.api.test.code-workspace
 /.vs
+/cpp/build/generateLinux/buildArtifactsForPackage.yml
