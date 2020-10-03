@@ -12,7 +12,7 @@ cd ${SCRIPT_DIR}
 # build real or fake?
 CFAKE="#"
 CREAL=
-if [[ $1 == "fake" ]] ; then
+if [[ $1 == "real" ]] ; then
     CFAKE=
     CREAL="#"
 fi
