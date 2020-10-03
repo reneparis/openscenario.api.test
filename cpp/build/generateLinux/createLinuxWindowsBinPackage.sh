@@ -87,7 +87,13 @@ for FOLDER in ${FOLDERS_TO_COPY} ; do
     SOURCE_FOLDER=`echo ${FOLDER} | cut -d : -f 1`
     TARGET_FOLDER=`echo ${FOLDER} | cut -d : -f 2`
     echo "Copying data from <${SOURCE_FOLDER}> to <${TARGET_FOLDER}>"
-    cp -r "${SCRIPT_DIR}/../output/${SOURCE_FOLDER}"/lib* "${OPEN_SCEANARIO_API}/lib/${TARGET_FOLDER}"
+    if [[ "${SOURCE_FOLDER}" == "Linux"* ]] ; then
+        cp -r "${SCRIPT_DIR}/../output/${SOURCE_FOLDER}"/lib* "${OPEN_SCEANARIO_API}/lib/${TARGET_FOLDER}"
+    else
+        cp -r "${SCRIPT_DIR}/../output/${SOURCE_FOLDER}"/*.lib "${OPEN_SCEANARIO_API}/lib/${TARGET_FOLDER}"
+        cp -r "${SCRIPT_DIR}/../output/${SOURCE_FOLDER}"/*.dll "${OPEN_SCEANARIO_API}/lib/${TARGET_FOLDER}"
+        cp -r "${SCRIPT_DIR}/../output/${SOURCE_FOLDER}"/*.exp "${OPEN_SCEANARIO_API}/lib/${TARGET_FOLDER}"
+    fi
     if [ $? -ne 0 ] ; then echo -e "${RED}Errors occurred!${WHITE}" ; fi
 done
 
