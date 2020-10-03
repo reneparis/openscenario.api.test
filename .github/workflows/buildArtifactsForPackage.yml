@@ -285,57 +285,6 @@ jobs:
         path: ./cpp/build/output/Win32Shared/Release/*
 
 
-  # x64 shared
-  x64SharedDebugBuild:
-    runs-on: windows-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: cmake generate solution Debug
-      run: cmake -G "Visual Studio 16 2019" -A x64 ./cpp -DMASTER_PROJECT=TRUE -DBUILD_STATIC_LIBS="OFF"
-      
-#    - name: build solution Debug
-#      run: C:/"Program Files (x86)"/"Microsoft Visual Studio"/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe OpenScenario-Cpp.sln /t:Build /p:Configuration=Debug /p:Platform=x64
-    
-    # fake build
-    - name: fake build solution Debug
-      run: mkdir -p ./cpp/build/output/x64Shared/Debug
-    - name: fake build binaries
-      run: cd ./cpp/build/output/x64Shared/Debug ; touch IndexerTester ; touch antlr4-runtime.lib ; touch antlr4-runtime.dll ; touch antlr4-runtime.dll.4.8 ; touch OpenScenarioLib.v1_0.dll ; touch libOpenScenarioLib.v1_0.dll.0 ; touch OpenScenarioLib.v1_0.dll.0.9.0
-    
-    - name: publish artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: x64SharedDebug
-        path: ./cpp/build/output/x64Shared/Debug/*
-
-
-  x64SharedReleaseBuild:
-    runs-on: windows-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: cmake generate solution Release
-      run: cmake -G "Visual Studio 16 2019" -A x64 ./cpp -DMASTER_PROJECT=TRUE -DBUILD_STATIC_LIBS="OFF"
-      
-#    - name: build solution Release
-#      run: C:/"Program Files (x86)"/"Microsoft Visual Studio"/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe OpenScenario-Cpp.sln /t:Build /p:Configuration=Release /p:Platform=x64
-    
-    # fake build
-    - name: fake build solution Release
-      run: mkdir -p ./cpp/build/output/x64Shared/Release
-    - name: fake build binaries
-      run: cd ./cpp/build/output/x64Shared/Release ; touch IndexerTester ; touch antlr4-runtime.lib ; touch antlr4-runtime.dll ; touch antlr4-runtime.dll.4.8 ; touch OpenScenarioLib.v1_0.dll ; touch libOpenScenarioLib.v1_0.dll.0 ; touch OpenScenarioLib.v1_0.dll.0.9.0
-    
-    - name: publish artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: x64SharedRelease
-        path: ./cpp/build/output/x64Shared/Release/*
-
-
   # Win32 static
   Win32StaticDebugBuild:
     runs-on: windows-latest
@@ -385,6 +334,57 @@ jobs:
       with:
         name: Win32StaticRelease
         path: ./cpp/build/output/Win32Static/Release/*
+
+
+  # x64 shared
+  x64SharedDebugBuild:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: cmake generate solution Debug
+      run: cmake -G "Visual Studio 16 2019" -A x64 ./cpp -DMASTER_PROJECT=TRUE -DBUILD_STATIC_LIBS="OFF"
+      
+#    - name: build solution Debug
+#      run: C:/"Program Files (x86)"/"Microsoft Visual Studio"/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe OpenScenario-Cpp.sln /t:Build /p:Configuration=Debug /p:Platform=x64
+    
+    # fake build
+    - name: fake build solution Debug
+      run: mkdir -p ./cpp/build/output/x64Shared/Debug
+    - name: fake build binaries
+      run: cd ./cpp/build/output/x64Shared/Debug ; touch IndexerTester ; touch antlr4-runtime.lib ; touch antlr4-runtime.dll ; touch antlr4-runtime.dll.4.8 ; touch OpenScenarioLib.v1_0.dll ; touch libOpenScenarioLib.v1_0.dll.0 ; touch OpenScenarioLib.v1_0.dll.0.9.0
+    
+    - name: publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: x64SharedDebug
+        path: ./cpp/build/output/x64Shared/Debug/*
+
+
+  x64SharedReleaseBuild:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: cmake generate solution Release
+      run: cmake -G "Visual Studio 16 2019" -A x64 ./cpp -DMASTER_PROJECT=TRUE -DBUILD_STATIC_LIBS="OFF"
+      
+#    - name: build solution Release
+#      run: C:/"Program Files (x86)"/"Microsoft Visual Studio"/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe OpenScenario-Cpp.sln /t:Build /p:Configuration=Release /p:Platform=x64
+    
+    # fake build
+    - name: fake build solution Release
+      run: mkdir -p ./cpp/build/output/x64Shared/Release
+    - name: fake build binaries
+      run: cd ./cpp/build/output/x64Shared/Release ; touch IndexerTester ; touch antlr4-runtime.lib ; touch antlr4-runtime.dll ; touch antlr4-runtime.dll.4.8 ; touch OpenScenarioLib.v1_0.dll ; touch libOpenScenarioLib.v1_0.dll.0 ; touch OpenScenarioLib.v1_0.dll.0.9.0
+    
+    - name: publish artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: x64SharedRelease
+        path: ./cpp/build/output/x64Shared/Release/*
 
 
   # x64 static
