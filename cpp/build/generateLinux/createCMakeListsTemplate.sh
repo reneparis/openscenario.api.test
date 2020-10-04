@@ -26,6 +26,11 @@ include( CMakeHelpers )
 
 
 ################################################################
+# Link against debug or release libs
+option( LINK_DEBUG \"Link debug version of OpenSCENARIO and ANTLR4\" OFF )
+
+
+################################################################
 # Build as static or shared lib, Debug or Release, for Linux or Windows
 option( BUILD_STATIC_LIBS \"Build the library as STATIC\" OFF )
 if( UNIX )
@@ -74,7 +79,7 @@ message (\"Building all into: \${CMAKE_BINARY_DIR}\")
 
 ################################################################
 # Set path to the OpenSCENARIO libs
-set( CMAKE_LIBRARY_PATH \"\${CMAKE_LIBRARY_PATH}; \${CMAKE_SOURCE_DIR}/${OPEN_SCEANARIO_API}\" )
+set( CMAKE_LIBRARY_PATH \"\${CMAKE_LIBRARY_PATH}; \${CMAKE_SOURCE_DIR}/lib\" )
 
 
 ################################################################
@@ -94,6 +99,8 @@ echo "
 set( SOURCES
   \${SOURCES}
   # your sources here
+  \"src/OpenScenarioReader.cpp\"
+  \"src/TinyXML2/tinyxml2.cpp\"
 )
 
 ################################################################
@@ -113,14 +120,17 @@ if( MSVC )
   source_group( Headers FILES \${HEADERS} )
 endif()
 
+
 ################################################################
 # Generate executable
 add_executable( \${PROJECT_NAME} \${SOURCES} \${HEADERS} )
 
-# Add OpenSCENARIO lib
+# Add OpenSCENARIO lib and ANTLR4 lib
 set( LIB_PREFIX \"\" )
 set( LIB_SUFFIX \"\" )
 if( BUILD_STATIC_LIBS STREQUAL \"ON\" )
+  set( LIB_TYPE_PATH \"Static\" )
+  set( ANTLR_STATIC \"-static\" )
   if( WIN32 )
     set( LIB_SUFFIX \".lib\" )
   elseif( UNIX )
@@ -128,21 +138,50 @@ if( BUILD_STATIC_LIBS STREQUAL \"ON\" )
     set( LIB_SUFFIX \".a\" )
   endif()
 else()
+  set( LIB_TYPE_PATH \"Shared\" )
+  set( ANTLR_STATIC \"\" )
   if( WIN32 )
-    set( LIB_SUFFIX \".dll\" )
+    set( LIB_SUFFIX \".lib\" )
   elseif( UNIX )
     set( LIB_PREFIX \"lib\" )
     set( LIB_SUFFIX \".so\" )
   endif()
 endif()
 
+if( \${PLATFORM_PARAM} STREQUAL \"Linux\" )
+  set( PLATFORM_PATH \"Linux\" )
+else()
+  set( PLATFORM_PATH \${CMAKE_VS_PLATFORM_NAME} )
+endif()
+
+if(LINK_DEBUG STREQUAL \"ON\")
+  set(D_R_PATH \"Debug\")
+else()
+  set(D_R_PATH \"Release\")
+endif()
+
 unset( XOSC_LIB CACHE )
 unset( ANTLR4_LIB CACHE )
-find_library( XOSC_LIB name \"\${LIB_PREFIX}OpenScenarioLib.v1_0\${LIB_SUFFIX}\" HINTS \"\${PROJECT_SOURCE_DIR}/lib\" )
-find_library( ANTLR4_LIB name \"\${LIB_PREFIX}antlr4-runtime\${LIB_SUFFIX}\" HINTS \"\${PROJECT_SOURCE_DIR}/lib\" )
-#add_library(\"\${LIB_PREFIX}OpenScenarioLib.v1_0\${LIB_SUFFIX}\" STATIC IMPORTED)
-#set_property(TARGET \"\${LIB_PREFIX}OpenScenarioLib.v1_0\${LIB_SUFFIX}\" PROPERTY IMPORTED_LOCATION \${XOSC_LIB})
+find_library( XOSC_LIB name \"\${LIB_PREFIX}OpenScenarioLib.v1_0\${LIB_SUFFIX}\" HINTS \"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}\" )
+find_library( ANTLR4_LIB name \"\${LIB_PREFIX}antlr4-runtime\${ANTLR_STATIC}\${LIB_SUFFIX}\" HINTS \"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}\" )
 target_link_libraries( \${PROJECT_NAME} \${XOSC_LIB} \${ANTLR4_LIB} )
+
+
+################################################################
+# Post build event
+if( BUILD_STATIC_LIBS STREQUAL \"OFF\" )
+  if( \${PLATFORM_PARAM} STREQUAL \"Linux\" )
+    add_custom_command(TARGET \${PROJECT_NAME} POST_BUILD COMMAND \${CMAKE_COMMAND} -E copy
+	  \"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}/libantlr4-runtime.so.4.8\"
+	  \"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}/libOpenScenarioLib.v1_0.so.0.9.0\"
+	  \${CMAKE_BINARY_DIR} )
+  else()
+    add_custom_command(TARGET \${PROJECT_NAME} POST_BUILD COMMAND \${CMAKE_COMMAND} -E copy
+	  \"\\\"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}/antlr4-runtime.dll\\\"\"
+	  \"\\\"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}/OpenScenarioLib.v1_0.dll\\\"\"
+	  \"\\\$(OutDir)\" )
+  endif()
+endif()
 
 
 ################################################################

@@ -102,6 +102,17 @@ done
 
 
 ################################################################
+# copy demo application
+################################################################
+echo
+STEP=`expr ${STEP} + 1`
+mkdir -p "${SCRIPT_DIR}/${OPEN_SCEANARIO_API}/src/TinyXML2"
+echo -e "${GREEN}Step ${STEP}: Copying demo application${WHITE}"
+cp "../../applications/openScenarioReader/v1_0/src/OpenScenarioReader.cpp" "${SCRIPT_DIR}/${OPEN_SCEANARIO_API}/src"
+cp "../../externalLibs/TinyXML2/tinyxml2.cpp" "${SCRIPT_DIR}/${OPEN_SCEANARIO_API}/src/TinyXML2"
+
+
+################################################################
 # copy examples
 ################################################################
 echo

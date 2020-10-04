@@ -31,3 +31,4 @@ RabbitVCSwithGitHub/*
 openscenario.api.test.code-workspace
 /.vs
 /cpp/build/generateLinux/buildArtifactsForPackage.yml
+cpp/build/generateLinux/cmakeTemplate.txt

@@ -151,5 +151,12 @@ for i in Linux Win32 x64 ; do
     done
 done
 
+
+# Copy the workflow to its github place
+STEP=`expr ${STEP} + 1`
+echo
+echo -e "${GREEN}Step ${STEP}: Copying ${WORKFLOWFILE} to the folder .github/workflows ${WHITE}"
+cp ${WORKFLOWFILE} ../../../.github/workflows
+
 echo
 echo -e "${GREEN}Finished: Generating artifacts workflow ${WHITE}"
