@@ -32,3 +32,5 @@ openscenario.api.test.code-workspace
 /.vs
 /cpp/build/generateLinux/buildArtifactsForPackage.yml
 cpp/build/generateLinux/cmakeTemplate.txt
+cpp/build/generateLinux/OpenScenarioDevpack.tgz
+cpp/applications/openScenarioTester/v1_0/src/findHeaders.sh
