@@ -145,7 +145,11 @@ endif()
 if( \${PLATFORM_PARAM} STREQUAL \"Linux\" )
   set( PLATFORM_PATH \"Linux\" )
 else()
-  set( PLATFORM_PATH \${CMAKE_VS_PLATFORM_NAME} )
+  if( NOT CMAKE_VS_PLATFORM_NAME )
+    set( PLATFORM_PATH \${PLATFORM_PARAM} )
+  else()
+    set( PLATFORM_PATH \${CMAKE_VS_PLATFORM_NAME} )
+  endif()
 endif()
 
 if( LINK_DEBUG STREQUAL \"ON\" )
@@ -173,7 +177,7 @@ if( BUILD_STATIC_LIBS STREQUAL \"OFF\" )
     add_custom_command( TARGET \${PROJECT_NAME} POST_BUILD COMMAND \${CMAKE_COMMAND} -E copy
 	  \"\\\"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}/antlr4-runtime.dll\\\"\"
 	  \"\\\"\${PROJECT_SOURCE_DIR}/lib/\${LIB_TYPE_PATH}/\${PLATFORM_PATH}/\${D_R_PATH}/OpenScenarioLib.v1_0.dll\\\"\"
-	  \"\\\$( OutDir )\" )
+	  \"\\\$(OutDir)\" )
   endif()
 endif()
 
